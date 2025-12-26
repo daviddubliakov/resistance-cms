@@ -40,11 +40,11 @@
         "images"
       ]
     },
-    "shame": {
+    "shames": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::shame.shame",
-      "inversedBy": "deputies"
+      "inversedBy": "deputats"
     }
   }
 }

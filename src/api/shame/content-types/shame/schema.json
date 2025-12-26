@@ -27,11 +27,11 @@
       "type": "blocks",
       "required": true
     },
-    "deputies": {
+    "deputats": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::deputy.deputy",
-      "mappedBy": "shame"
+      "mappedBy": "shames"
     },
     "resources": {
       "type": "component",

@@ -460,7 +460,7 @@ export interface ApiDeputyDeputy extends Struct.CollectionTypeSchema {
     photo: Schema.Attribute.Media<'images'>;
     placeOfEmployment: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    shame: Schema.Attribute.Relation<'manyToOne', 'api::shame.shame'>;
+    shames: Schema.Attribute.Relation<'manyToMany', 'api::shame.shame'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -482,7 +482,7 @@ export interface ApiShameShame extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     date: Schema.Attribute.Date & Schema.Attribute.Required;
-    deputies: Schema.Attribute.Relation<'oneToMany', 'api::deputy.deputy'>;
+    deputats: Schema.Attribute.Relation<'manyToMany', 'api::deputy.deputy'>;
     description: Schema.Attribute.Text & Schema.Attribute.Required;
     details: Schema.Attribute.Blocks & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
