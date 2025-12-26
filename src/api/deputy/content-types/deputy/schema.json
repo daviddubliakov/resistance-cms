@@ -14,7 +14,7 @@
     "firstName": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": false
     },
     "lastName": {
       "type": "string",
