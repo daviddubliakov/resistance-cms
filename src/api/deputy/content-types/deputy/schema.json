@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "deputies",
+  "info": {
+    "singularName": "deputy",
+    "pluralName": "deputies",
+    "displayName": "Депутат"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firstName": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "party": {
+      "type": "string"
+    },
+    "fraction": {
+      "type": "string"
+    },
+    "placeOfEmployment": {
+      "type": "string"
+    },
+    "isCorrupt": {
+      "type": "boolean",
+      "default": false
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "shame": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::shame.shame",
+      "inversedBy": "deputies"
+    }
+  }
+}

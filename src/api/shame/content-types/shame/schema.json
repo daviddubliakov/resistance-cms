@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shames",
+  "info": {
+    "singularName": "shame",
+    "pluralName": "shames",
+    "displayName": "Зашквар"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "details": {
+      "type": "blocks",
+      "required": true
+    },
+    "deputies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::deputy.deputy",
+      "mappedBy": "shame"
+    },
+    "resources": {
+      "type": "component",
+      "component": "resource.resource",
+      "repeatable": true,
+      "required": true
+    }
+  }
+}
