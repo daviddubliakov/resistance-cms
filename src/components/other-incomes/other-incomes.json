@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_other_incomes_other_incomes",
+  "info": {
+    "displayName": "otherIncomes",
+    "icon": "database"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

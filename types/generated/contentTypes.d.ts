@@ -454,10 +454,18 @@ export interface ApiDeputyDeputy extends Struct.CollectionTypeSchema {
       'api::deputy.deputy'
     > &
       Schema.Attribute.Private;
+    otherIncomes: Schema.Attribute.Component<
+      'other-incomes.other-incomes',
+      true
+    >;
     party: Schema.Attribute.String;
     photo: Schema.Attribute.Media<'images'>;
     placeOfEmployment: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    relatedBusinessess: Schema.Attribute.Component<
+      'related-businessess.related-businessess',
+      true
+    >;
     shames: Schema.Attribute.Relation<'manyToMany', 'api::shame.shame'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

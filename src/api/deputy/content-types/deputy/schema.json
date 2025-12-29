@@ -45,6 +45,17 @@
       "relation": "manyToMany",
       "target": "api::shame.shame",
       "inversedBy": "deputats"
+    },
+    "relatedBusinessess": {
+      "type": "component",
+      "component": "related-businessess.related-businessess",
+      "repeatable": true
+    },
+    "otherIncomes": {
+      "type": "component",
+      "component": "other-incomes.other-incomes",
+      "repeatable": true,
+      "required": false
     }
   }
 }

@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_related_businessess_related_businessesses",
+  "info": {
+    "displayName": "relatedBusinessess",
+    "icon": "briefcase"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}
