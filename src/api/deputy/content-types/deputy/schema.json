@@ -21,10 +21,14 @@
       "required": true
     },
     "party": {
-      "type": "string"
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::party.party",
+      "inversedBy": "deputats"
     },
     "fraction": {
-      "type": "string"
+      "type": "string",
+      "default": "Позафракційний"
     },
     "placeOfEmployment": {
       "type": "string"

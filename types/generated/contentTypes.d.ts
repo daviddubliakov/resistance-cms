@@ -445,7 +445,8 @@ export interface ApiDeputyDeputy extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     firstName: Schema.Attribute.String & Schema.Attribute.Required;
-    fraction: Schema.Attribute.String;
+    fraction: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'\u041F\u043E\u0437\u0430\u0444\u0440\u0430\u043A\u0446\u0456\u0439\u043D\u0438\u0439'>;
     isCorrupt: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     lastName: Schema.Attribute.String & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -458,7 +459,7 @@ export interface ApiDeputyDeputy extends Struct.CollectionTypeSchema {
       'other-incomes.other-incomes',
       true
     >;
-    party: Schema.Attribute.String;
+    party: Schema.Attribute.Relation<'manyToOne', 'api::party.party'>;
     photo: Schema.Attribute.Media<'images'>;
     placeOfEmployment: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
@@ -467,6 +468,33 @@ export interface ApiDeputyDeputy extends Struct.CollectionTypeSchema {
       true
     >;
     shames: Schema.Attribute.Relation<'manyToMany', 'api::shame.shame'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPartyParty extends Struct.CollectionTypeSchema {
+  collectionName: 'parties';
+  info: {
+    displayName: '\u041F\u0430\u0440\u0442\u0456\u044F';
+    pluralName: 'parties';
+    singularName: 'party';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    deputats: Schema.Attribute.Relation<'oneToMany', 'api::deputy.deputy'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::party.party'> &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1015,6 +1043,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::deputy.deputy': ApiDeputyDeputy;
+      'api::party.party': ApiPartyParty;
       'api::shame.shame': ApiShameShame;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
