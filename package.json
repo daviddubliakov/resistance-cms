@@ -20,8 +20,6 @@
     "@strapi/plugin-users-permissions": "5.33.0",
     "@strapi/provider-upload-cloudinary": "^5.33.3",
     "@strapi/strapi": "5.33.0",
-    "better-sqlite3": "12.4.1",
-    "esbuild": "^0.27.2",
     "pg": "^8.16.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -41,5 +39,6 @@
   "strapi": {
     "uuid": "3b923cc9-45f3-4183-aef6-8a9ccf4e5703",
     "installId": "3f97f673ebf0a41fd92631949d952426392a9e08ea7be3e370192c1b2746664b"
-  }
+  },
+  "packageManager": "pnpm@10.28.0+sha512.05df71d1421f21399e053fde567cea34d446fa02c76571441bfc1c7956e98e363088982d940465fd34480d4d90a0668bc12362f8aa88000a64e83d0b0e47be48"
 }
