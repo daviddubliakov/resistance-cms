@@ -8,21 +8,34 @@ export default factories.createCoreController(
   'api::deputy.deputy',
   ({ strapi }) => ({
     async find(ctx) {
-      ctx.query = { ...ctx.query, sort: 'lastName:asc' };
+      const query = ctx.query as any;
+      const page = parseInt(query.pagination?.page) || 1;
 
-      const { data, meta } = await super.find(ctx);
-      if (!data || data.length === 0) return { data, meta };
+      let mayor = null;
 
-      const mayorIndex = data.findIndex((deputy) => {
-        const employment = deputy.attributes.placeOfEmployment || '';
-        return employment.includes('Міський голова');
-      });
-
-      if (mayorIndex !== -1) {
-        const [mayor] = data.splice(mayorIndex, 1);
-        data.unshift(mayor);
+      if (page === 1) {
+        const mayors = await strapi.documents('api::deputy.deputy').findMany({
+          filters: { placeOfEmployment: { $contains: 'Міський голова' } },
+          populate: ['shames', 'photo'],
+          limit: 1,
+        });
+        if (mayors.length > 0) mayor = mayors[0];
       }
 
+      ctx.query = {
+        ...query,
+        sort: 'lastName:asc',
+        filters: {
+          ...(query.filters || {}),
+          ...(mayor ? { documentId: { $ne: mayor.documentId } } : {}),
+        },
+      };
+
+      const { data, meta } = await super.find(ctx);
+
+      if (mayor && page === 1) {
+        data.unshift(mayor);
+      }
       return { data, meta };
     },
   }),
