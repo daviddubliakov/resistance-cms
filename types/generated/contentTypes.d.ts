@@ -468,6 +468,7 @@ export interface ApiDeputyDeputy extends Struct.CollectionTypeSchema {
       true
     >;
     shames: Schema.Attribute.Relation<'manyToMany', 'api::shame.shame'>;
+    shamesCount: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
