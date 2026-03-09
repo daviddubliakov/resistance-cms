@@ -3,7 +3,7 @@ export default {
     const { result } = event;
     const deputy = result.deputats?.[0] || result.deputats;
     if (deputy?.documentId) {
-      await changeCounter(deputy.documentId, 1); // Додали зашквар -> +1
+      await changeCounter(deputy.documentId, 1);
     }
   },
 
@@ -23,8 +23,8 @@ export default {
 
     // Якщо депутат змінився
     if (oldDeputyId !== newDeputyId) {
-      if (oldDeputyId) await changeCounter(oldDeputyId, -1); // Відняли у старого
-      if (newDeputyId) await changeCounter(newDeputyId, 1); // Додали новому
+      if (oldDeputyId) await changeCounter(oldDeputyId, -1);
+      if (newDeputyId) await changeCounter(newDeputyId, 1);
     }
   },
 
@@ -39,7 +39,7 @@ export default {
 
   async afterDelete(event) {
     if (event.state?.oldDeputyId) {
-      await changeCounter(event.state.oldDeputyId, -1); // Видалили зашквар -> -1
+      await changeCounter(event.state.oldDeputyId, -1);
     }
   },
 };
