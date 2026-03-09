@@ -8,11 +8,13 @@ export default {
   },
 
   async beforeUpdate(event) {
-    const docId = event.params.where?.documentId || event.params.where?.id;
-    const existing: any = await strapi.documents('api::shame.shame').findOne({
-      documentId: docId as string,
+    const numericId = event.params.where?.id;
+
+    const existing: any = await strapi.db.query('api::shame.shame').findOne({
+      where: { id: numericId },
       populate: ['deputats'],
     });
+
     event.state = { oldDeputyId: existing?.deputats?.[0]?.documentId };
   },
 
@@ -21,7 +23,6 @@ export default {
     const newDeputyId = result.deputats?.[0]?.documentId;
     const oldDeputyId = state?.oldDeputyId;
 
-    // Якщо депутат змінився
     if (oldDeputyId !== newDeputyId) {
       if (oldDeputyId) await changeCounter(oldDeputyId, -1);
       if (newDeputyId) await changeCounter(newDeputyId, 1);
@@ -29,11 +30,13 @@ export default {
   },
 
   async beforeDelete(event) {
-    const docId = event.params.where?.documentId || event.params.where?.id;
-    const existing: any = await strapi.documents('api::shame.shame').findOne({
-      documentId: docId as string,
+    const numericId = event.params.where?.id;
+
+    const existing: any = await strapi.db.query('api::shame.shame').findOne({
+      where: { id: numericId },
       populate: ['deputats'],
     });
+
     event.state = { oldDeputyId: existing?.deputats?.[0]?.documentId };
   },
 

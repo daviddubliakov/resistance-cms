@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-03-09T19:48:16.302Z"
+    "x-generation-date": "2026-03-09T20:11:16.940Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -3072,6 +3072,9 @@
                   "example": "string or id"
                 }
               },
+              "shamesCount": {
+                "type": "integer"
+              },
               "relatedBusinessess": {
                 "type": "array",
                 "items": {
@@ -3083,9 +3086,6 @@
                 "items": {
                   "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
                 }
-              },
-              "shamesCount": {
-                "type": "integer"
               },
               "locale": {
                 "type": "string"
@@ -4349,6 +4349,9 @@
                         }
                       }
                     },
+                    "shamesCount": {
+                      "type": "integer"
+                    },
                     "relatedBusinessess": {
                       "type": "array",
                       "items": {
@@ -4360,9 +4363,6 @@
                       "items": {
                         "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
                       }
-                    },
-                    "shamesCount": {
-                      "type": "integer"
                     },
                     "createdAt": {
                       "type": "string",
@@ -4714,6 +4714,9 @@
               }
             }
           },
+          "shamesCount": {
+            "type": "integer"
+          },
           "relatedBusinessess": {
             "type": "array",
             "items": {
@@ -4725,9 +4728,6 @@
             "items": {
               "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
             }
-          },
-          "shamesCount": {
-            "type": "integer"
           },
           "createdAt": {
             "type": "string",
@@ -6422,6 +6422,9 @@
                     }
                   }
                 },
+                "shamesCount": {
+                  "type": "integer"
+                },
                 "relatedBusinessess": {
                   "type": "array",
                   "items": {
@@ -6433,9 +6436,6 @@
                   "items": {
                     "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
                   }
-                },
-                "shamesCount": {
-                  "type": "integer"
                 },
                 "createdAt": {
                   "type": "string",
@@ -7991,6 +7991,9 @@
                     }
                   }
                 },
+                "shamesCount": {
+                  "type": "integer"
+                },
                 "relatedBusinessess": {
                   "type": "array",
                   "items": {
@@ -8002,9 +8005,6 @@
                   "items": {
                     "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
                   }
-                },
-                "shamesCount": {
-                  "type": "integer"
                 },
                 "createdAt": {
                   "type": "string",
