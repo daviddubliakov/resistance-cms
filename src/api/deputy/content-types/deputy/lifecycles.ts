@@ -1,39 +1,30 @@
 export default {
   async afterCreate(event) {
-    await checkAndUpdateMyCount(event.result);
+    await updateDeputyShameCount(event.result.documentId);
   },
 
   async afterUpdate(event) {
-    await checkAndUpdateMyCount(event.result);
-  },
-  async afterDelete(event) {
-    await checkAndUpdateMyCount(event);
+    const docId = event.result?.documentId || event.params?.where?.documentId;
+    if (docId) {
+      await updateDeputyShameCount(docId);
+    }
   },
 };
 
-async function checkAndUpdateMyCount(result: any) {
-  if (!result?.documentId) return;
-  const docId = result.documentId;
-
+async function updateDeputyShameCount(docId: string) {
   try {
-    const shames = await strapi.documents('api::shame.shame').findMany({
-      filters: { deputats: { documentId: docId } },
-      fields: ['id'],
+    const count = await strapi.db.query('api::shame.shame').count({
+      where: {
+        deputats: { documentId: docId },
+        publishedAt: { $notNull: true },
+      },
     });
 
-    const actualCount = shames.length;
-    const currentSavedCount = result.shamesCount || 0;
-
-    if (actualCount !== currentSavedCount) {
-      await strapi.documents('api::deputy.deputy').update({
-        documentId: docId,
-        data: { shamesCount: actualCount },
-      });
-      console.log(
-        `🔄 [Deputy-Sync] Депутат ${docId}: оновлено лічильник на ${actualCount}`,
-      );
-    }
+    await strapi.db.query('api::deputy.deputy').updateMany({
+      where: { documentId: docId },
+      data: { shamesCount: count },
+    });
   } catch (err) {
-    console.error(`❌ [Deputy-Sync] Помилка:`, err.message);
+    console.error('❌ Помилка оновлення без циклу:', err.message);
   }
 }
