@@ -60,6 +60,10 @@
       "component": "other-incomes.other-incomes",
       "repeatable": true,
       "required": false
+    },
+    "shamesCount": {
+      "type": "integer",
+      "default": 0
     }
   }
 }
