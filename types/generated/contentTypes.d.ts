@@ -438,7 +438,7 @@ export interface ApiDeputyDeputy extends Struct.CollectionTypeSchema {
     singularName: 'deputy';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
