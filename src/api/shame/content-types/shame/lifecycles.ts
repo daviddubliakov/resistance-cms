@@ -1,65 +1,79 @@
+interface DeputyRef {
+  documentId: string;
+}
+
+interface ShameWithDeputats {
+  id: number;
+  documentId: string;
+  deputats: DeputyRef[];
+}
+
+async function findShameWithDeputats(where: Record<string, unknown>) {
+  return strapi.db.query('api::shame.shame').findOne({
+    where,
+    populate: ['deputats'],
+  }) as Promise<ShameWithDeputats | null>;
+}
+
 export default {
   async afterCreate(event) {
-    const { result } = event;
-    const deputy = result.deputats?.[0] || result.deputats;
-    if (deputy?.documentId) {
-      await changeCounter(deputy.documentId, 1);
+    const created = await findShameWithDeputats({ id: event.result.id });
+
+    for (const deputy of created?.deputats || []) {
+      await syncDeputyCount(deputy.documentId);
     }
   },
 
   async beforeUpdate(event) {
     const numericId = event.params.where?.id;
+    const existing = await findShameWithDeputats({ id: numericId });
 
-    const existing: any = await strapi.db.query('api::shame.shame').findOne({
-      where: { id: numericId },
-      populate: ['deputats'],
-    });
-
-    event.state = { oldDeputyId: existing?.deputats?.[0]?.documentId };
+    event.state = {
+      oldDeputyIds: (existing?.deputats || []).map((d) => d.documentId),
+    };
   },
 
   async afterUpdate(event) {
-    const { result, state } = event;
-    const newDeputyId = result.deputats?.[0]?.documentId;
-    const oldDeputyId = state?.oldDeputyId;
+    const updated = await findShameWithDeputats({ id: event.result.id });
 
-    if (oldDeputyId !== newDeputyId) {
-      if (oldDeputyId) await changeCounter(oldDeputyId, -1);
-      if (newDeputyId) await changeCounter(newDeputyId, 1);
+    const newDeputyIds = (updated?.deputats || []).map((d) => d.documentId);
+    const oldDeputyIds: string[] = event.state?.oldDeputyIds || [];
+    const affectedDeputyIds = new Set([...oldDeputyIds, ...newDeputyIds]);
+
+    for (const deputyId of affectedDeputyIds) {
+      await syncDeputyCount(deputyId);
     }
   },
 
   async beforeDelete(event) {
     const numericId = event.params.where?.id;
+    const existing = await findShameWithDeputats({ id: numericId });
 
-    const existing: any = await strapi.db.query('api::shame.shame').findOne({
-      where: { id: numericId },
-      populate: ['deputats'],
-    });
-
-    event.state = { oldDeputyId: existing?.deputats?.[0]?.documentId };
+    event.state = {
+      oldDeputyIds: (existing?.deputats || []).map((d) => d.documentId),
+    };
   },
 
   async afterDelete(event) {
-    if (event.state?.oldDeputyId) {
-      await changeCounter(event.state.oldDeputyId, -1);
+    const oldDeputyIds: string[] = event.state?.oldDeputyIds || [];
+    for (const deputyId of oldDeputyIds) {
+      await syncDeputyCount(deputyId);
     }
   },
 };
 
-async function changeCounter(deputyId: string, diff: number) {
+async function syncDeputyCount(deputyId: string) {
   try {
-    const deputy: any = await strapi.documents('api::deputy.deputy').findOne({
-      documentId: deputyId,
-      fields: ['shamesCount'],
+    const count = await strapi.db.query('api::shame.shame').count({
+      where: {
+        deputats: { documentId: deputyId },
+        publishedAt: { $notNull: true },
+      },
     });
-
-    const currentCount = deputy?.shamesCount || 0;
-    const newCount = Math.max(0, currentCount + diff);
 
     await strapi.documents('api::deputy.deputy').update({
       documentId: deputyId,
-      data: { shamesCount: newCount },
+      data: { shamesCount: count },
     });
   } catch (e) {
     console.error('Помилка лічильника:', e.message);
