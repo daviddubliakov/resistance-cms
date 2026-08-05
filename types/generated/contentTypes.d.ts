@@ -448,6 +448,9 @@ export interface ApiDeputyDeputy extends Struct.CollectionTypeSchema {
     fraction: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'\u041F\u043E\u0437\u0430\u0444\u0440\u0430\u043A\u0446\u0456\u0439\u043D\u0438\u0439'>;
     isCorrupt: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    isSteppedDown: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
     lastName: Schema.Attribute.String & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
