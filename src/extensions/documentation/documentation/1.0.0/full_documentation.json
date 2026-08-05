@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-06-01T20:31:01.688Z"
+    "x-generation-date": "2026-08-05T12:22:06.135Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -3017,7 +3017,8 @@
           "data": {
             "required": [
               "firstName",
-              "lastName"
+              "lastName",
+              "isSteppedDown"
             ],
             "type": "object",
             "properties": {
@@ -3087,6 +3088,9 @@
                   "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
                 }
               },
+              "isSteppedDown": {
+                "type": "boolean"
+              },
               "locale": {
                 "type": "string"
               },
@@ -3147,7 +3151,8 @@
         "type": "object",
         "required": [
           "firstName",
-          "lastName"
+          "lastName",
+          "isSteppedDown"
         ],
         "properties": {
           "id": {
@@ -4364,6 +4369,9 @@
                         "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
                       }
                     },
+                    "isSteppedDown": {
+                      "type": "boolean"
+                    },
                     "createdAt": {
                       "type": "string",
                       "format": "date-time"
@@ -4728,6 +4736,9 @@
             "items": {
               "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
             }
+          },
+          "isSteppedDown": {
+            "type": "boolean"
           },
           "createdAt": {
             "type": "string",
@@ -6437,6 +6448,9 @@
                     "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
                   }
                 },
+                "isSteppedDown": {
+                  "type": "boolean"
+                },
                 "createdAt": {
                   "type": "string",
                   "format": "date-time"
@@ -8005,6 +8019,9 @@
                   "items": {
                     "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
                   }
+                },
+                "isSteppedDown": {
+                  "type": "boolean"
                 },
                 "createdAt": {
                   "type": "string",

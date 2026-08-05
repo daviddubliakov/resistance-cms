@@ -64,6 +64,11 @@
       "component": "other-incomes.other-incomes",
       "repeatable": true,
       "required": false
+    },
+    "isSteppedDown": {
+      "type": "boolean",
+      "required": true,
+      "default": false
     }
   }
 }
