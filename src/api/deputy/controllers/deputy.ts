@@ -14,7 +14,7 @@ export default factories.createCoreController(
 
       const mayors = await strapi.documents('api::deputy.deputy').findMany({
         filters: { placeOfEmployment: { $contains: 'Міський голова' } },
-        populate: ['shames', 'photo'],
+        populate: query.populate,
         limit: 1,
       });
       const mayor = mayors.length > 0 ? mayors[0] : null;
