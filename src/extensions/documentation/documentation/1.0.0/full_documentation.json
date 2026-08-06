@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-02-09T22:22:09.577Z"
+    "x-generation-date": "2026-08-05T12:22:06.135Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -3017,7 +3017,8 @@
           "data": {
             "required": [
               "firstName",
-              "lastName"
+              "lastName",
+              "isSteppedDown"
             ],
             "type": "object",
             "properties": {
@@ -3072,6 +3073,9 @@
                   "example": "string or id"
                 }
               },
+              "shamesCount": {
+                "type": "integer"
+              },
               "relatedBusinessess": {
                 "type": "array",
                 "items": {
@@ -3083,6 +3087,9 @@
                 "items": {
                   "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
                 }
+              },
+              "isSteppedDown": {
+                "type": "boolean"
               },
               "locale": {
                 "type": "string"
@@ -3144,7 +3151,8 @@
         "type": "object",
         "required": [
           "firstName",
-          "lastName"
+          "lastName",
+          "isSteppedDown"
         ],
         "properties": {
           "id": {
@@ -4346,6 +4354,9 @@
                         }
                       }
                     },
+                    "shamesCount": {
+                      "type": "integer"
+                    },
                     "relatedBusinessess": {
                       "type": "array",
                       "items": {
@@ -4357,6 +4368,9 @@
                       "items": {
                         "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
                       }
+                    },
+                    "isSteppedDown": {
+                      "type": "boolean"
                     },
                     "createdAt": {
                       "type": "string",
@@ -4708,6 +4722,9 @@
               }
             }
           },
+          "shamesCount": {
+            "type": "integer"
+          },
           "relatedBusinessess": {
             "type": "array",
             "items": {
@@ -4719,6 +4736,9 @@
             "items": {
               "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
             }
+          },
+          "isSteppedDown": {
+            "type": "boolean"
           },
           "createdAt": {
             "type": "string",
@@ -6413,6 +6433,9 @@
                     }
                   }
                 },
+                "shamesCount": {
+                  "type": "integer"
+                },
                 "relatedBusinessess": {
                   "type": "array",
                   "items": {
@@ -6424,6 +6447,9 @@
                   "items": {
                     "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
                   }
+                },
+                "isSteppedDown": {
+                  "type": "boolean"
                 },
                 "createdAt": {
                   "type": "string",
@@ -7979,6 +8005,9 @@
                     }
                   }
                 },
+                "shamesCount": {
+                  "type": "integer"
+                },
                 "relatedBusinessess": {
                   "type": "array",
                   "items": {
@@ -7990,6 +8019,9 @@
                   "items": {
                     "$ref": "#/components/schemas/OtherIncomesOtherIncomesComponent"
                   }
+                },
+                "isSteppedDown": {
+                  "type": "boolean"
                 },
                 "createdAt": {
                   "type": "string",
